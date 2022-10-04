@@ -1,5 +1,6 @@
 from pieces import *
 
+#이것은 board class 입니다.
 class Board:
 	def __init__(self):
 		self.board = []
