@@ -12,6 +12,7 @@ class Judge:
 		for w in range(WIDTH):
 			for h in range(HEIGHT):
 				if self.is_valid_move(w, h, king_x, king_y):
+
 					return True
 
 	def is_check_mate(self):
@@ -19,17 +20,21 @@ class Judge:
 		king_x, king_y = self.board.get_king_position(self.opposite_player.color)
 
 		# Rule 1 - is the king in check?
-		if self.is_check():
+		if self.is_check() == False:
 			return False
 
 		# TODO: Rule 2 - is the king in checkmate?
 		# Rule 2 - can any of the pieces capture the piece that is checking the king?
-		if self.judge.is_attacker_can_be_captured(x2, y2):
+		if self.is_attackers_can_be_captured(x2, y2):
 			print("----- Check! -----")
 			return False
 
 		# TODO: Rule 3
 		# Rule 3 - can any of the pieces block the check?
+		if self.is_check_can_be_blocked(x2, y2):
+			print("----- Check! -----")
+			return False
+		
 
 
 		# TODO: Rule 4 
@@ -37,7 +42,7 @@ class Judge:
 		valid_moves = king.get_valid_moves(king_x, king_y)
 		for w in range(WIDTH):
 			for h in range(HEIGHT):
-				valid_moves = [move for move in valid_moves if not self.judge.is_valid_move(w, h, move[0], move[1])]
+				valid_moves = [move for move in valid_moves if not self.is_valid_move(w, h, move[0], move[1])]
 		if len(valid_moves) == 0:
 			return True
 
@@ -52,9 +57,11 @@ class Judge:
 		
 		return False
 
-	def is_attacker_can_be_captured(self, x, y):
+	def is_attackers_can_be_captured(self, x, y):
 		for w in range(WIDTH):
 			for h in range(HEIGHT):
 				if self.judge.is_valid_move(w, h, x, y):
 					return True
 		return False
+
+	

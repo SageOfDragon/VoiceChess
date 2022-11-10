@@ -29,13 +29,13 @@ class ChessGame:
 			self.board.print_board()
 			self.current_player.move()
 
-			if self.judge.is_check():
-				if self.judge.is_check_mate():
-					print("----- Check Mate! -----")
-					print(f"Player {self.opposite_player.color} wins!")
-					break
-				else:
-					print("------- Check! -------")
+		#	if self.judge.is_check():
+		#		if self.judge.is_check_mate():
+		#			print("----- Check Mate! -----")
+		#			print(f"Player {self.opposite_player.color} wins!")
+		#			break
+		#		else:
+		#			print("------- Check! -------")
 
 			if self.current_player == self.player1:
 				self.current_player = self.player2
@@ -43,7 +43,7 @@ class ChessGame:
 			else:
 				self.current_player = self.player1
 				self.opposite_player = self.player2
-			
+		
 
 class Player:
 	def __init__(self, color, board=None):
@@ -54,14 +54,14 @@ class Player:
 		print("Player", self.color, "move")
 		x1, y1, x2, y2 = map(int, input("x1, y1, x2, y2: ").split())
 
-		self.board.board[y2][x2] = self.board.board[y1][x1]
-		self.board.board[y1][x1] = None
-
-		# if isValidMove(x1, y1, x2, y2):
-		# 	self.board.board[y2][x2] = self.board.board[y1][x1]
-		# 	self.board.board[y1][x1] = None
-		# else:
-		# 	print("Invalid move")
+		if Judge.is_valid_move(self, x1, y1, x2, y2):
+			self.board.board[y2][x2] = self.board.board[y1][x1]
+			self.board.board[y1][x1] = None
+		
+		else:
+			print("Invalid move!")
+			self.move()
+		
 
 if __name__ == '__main__':
     main()

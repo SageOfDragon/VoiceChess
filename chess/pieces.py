@@ -134,3 +134,5 @@ class Pawn (Piece):
 				if x < WIDTH - 1:
 					moves.append ((x + 1, y - 1))
 		return moves
+
+

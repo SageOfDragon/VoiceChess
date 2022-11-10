@@ -1,6 +1,6 @@
 from pieces import *
+from termcolor import colored
 
-#이것은 board class 입니다.
 class Board:
 	def __init__(self):
 		self.board = []
@@ -55,3 +55,16 @@ class Board:
 				if p is not None and type(p).__name__ is "King" and p.color == color:
 					return j, i
 		return None
+
+	def get_looking_pieces(self, color):
+		pieces = []
+		for i in range(HEIGHT):
+			for j in range(WIDTH):
+				p = self.board[i][j]
+				if p is not None and p.color != color:
+					pieces.append(p)
+		return pieces
+
+
+
+	
